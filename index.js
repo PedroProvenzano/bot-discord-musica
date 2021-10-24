@@ -1,3 +1,4 @@
+require("dotenv/config");
 const Discord = require("discord.js");
 const ytdl = require("ytdl-core");
 const client = new Discord.Client();
@@ -42,6 +43,7 @@ const GetNextSongHandler = async (msg) => {
   nowPlaying = await GetTitleSong(newSong);
   const newQueue = GetSongTitles(queue);
   io.emit("newSongAdded", { queue: newQueue, nowPlaying });
+  console.log(newSong);
   return newSong;
 };
 
@@ -85,10 +87,11 @@ client.on("message", async (msg) => {
     AddToQueueHandler(youtubeLink, msg);
 
     const connection = await msg.member.voice.channel.join();
+    let linkURL = await GetNextSongHandler(msg);
     play = () => {
       isPlaying = true;
       dispatcher = connection.play(
-        ytdl(GetNextSongHandler(msg), {
+        ytdl(linkURL, {
           filter: "audioonly",
         })
       );
