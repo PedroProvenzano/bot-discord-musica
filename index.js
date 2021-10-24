@@ -17,6 +17,7 @@ client.on("ready", () => {
 let queue = [];
 let titleQueue = [];
 let isPlaying = false;
+let nowPlaying = "";
 const port = 3000;
 let dispatcher;
 let play;
@@ -34,11 +35,13 @@ const AddToQueueHandler = async (link, msg) => {
   io.emit("newSongAdded", { queue: newQueue });
 };
 
-const GetNextSongHandler = (msg) => {
+const GetNextSongHandler = async (msg) => {
   let newSong = queue[0];
   queue = queue.slice(1);
   console.log(`Removing ${newSong} from playlist`);
-  msg.reply(`Reproduciendo ${newSong}`);
+  nowPlaying = newSong;
+  const newQueue = GetSongTitles(queue);
+  io.emit("newSongAdded", { queue: newQueue, nowPlaying });
   return newSong;
 };
 

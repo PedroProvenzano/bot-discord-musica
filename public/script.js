@@ -26,7 +26,7 @@ socket.on("newSongConfirm", (data) => {
 });
 
 socket.on("newSongAdded", (data) => {
-  QueuePrinter(data.queue);
+  QueuePrinter(data.queue, data.nowPlaying);
 });
 
 socket.on("welcomeInfo", (data) => {
@@ -35,9 +35,13 @@ socket.on("welcomeInfo", (data) => {
 });
 
 // Functions
-const QueuePrinter = (queue) => {
+const QueuePrinter = (queue, nowPlaying = null) => {
   const ListQueue = document.querySelector(".cont-list");
   ListQueue.innerHTML = "";
+  if (nowPlaying) {
+    let divNowPlaying = document.querySelector("#nowPlaying");
+    divNowPlaying.innerHTML = `<p> Estas escuchando: ${nowPlaying}</p>`;
+  }
   if (queue?.length >= 1) {
     for (let link of queue) {
       let newDiv = document.createElement("div");

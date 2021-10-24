@@ -91,3 +91,7 @@ input {
 .item:nth-of-type(2n) {
   background-color: rgba(0, 0, 0, 0.075);
 }
+
+.nowPlaying {
+  background-color: rgb(234, 241, 199);
+}

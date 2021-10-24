@@ -1,20 +1,24 @@
 // Client
 
 / Send
-- newSong 
+- newSong D
 
 / Recieve
-- newSongConfirm
-- newSongAdded
-
+- newSongConfirm D
+- newSongAdded D
 
 
 // Server
 
-/ Send
-- newSongConfirm
-- newSongAdded
+/ Send 
+- newSongConfirm D
+- newSongAdded D
 
 / Recieve
-- newSong
-- 
+- newSong D
+
+
+
+/ References
+- TD : To Do 
+- D : Done
