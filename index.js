@@ -129,6 +129,6 @@ io.on("connection", async (socket) => {
   });
 });
 
-http.listen(port, () => {
+http.listen(process.env.PORT, () => {
   console.log("listening on *:3000");
 });
