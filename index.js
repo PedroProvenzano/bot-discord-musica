@@ -62,7 +62,7 @@ const GetSongTitles = async (queue) => {
   return TitleQueue;
 };
 
-const GetTitleSong = (link) => {
+const GetTitleSong = async (link) => {
   let key = getVideoId(link).id;
   await fetch(urlAPI + key + "&key=" + APIKEY)
     .then((res) => res.json())
