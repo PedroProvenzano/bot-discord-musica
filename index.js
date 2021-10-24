@@ -7,7 +7,7 @@ const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const fetch = require("node-fetch");
 let urlAPI = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id=";
-let APIKEY = "AIzaSyDbMgPlyRKiE-7nVK1aIsnWFhZLBt7JaMY";
+let APIKEY = process.env.YOUTUBEAPI;
 const getVideoId = require("get-video-id");
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -109,7 +109,7 @@ client.on("message", async (msg) => {
   }
 });
 
-client.login("NzUwNzg5NzMwMDE0MDY4NzQ2.X0_pbA.4xvTUKa4m2r2Gztt23lMWB5PSmg");
+client.login(process.env.TOKENDISCORD);
 
 io.on("connection", async (socket) => {
   console.log("Usuario conectado");
