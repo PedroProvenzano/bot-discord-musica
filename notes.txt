@@ -1,0 +1,20 @@
+// Client
+
+/ Send
+- newSong 
+
+/ Recieve
+- newSongConfirm
+- newSongAdded
+
+
+
+// Server
+
+/ Send
+- newSongConfirm
+- newSongAdded
+
+/ Recieve
+- newSong
+- 
