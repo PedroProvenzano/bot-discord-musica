@@ -41,6 +41,7 @@ const GetNextSongHandler = async (msg) => {
   queue = queue.slice(1);
   console.log(`Removing ${newSong} from playlist`);
   nowPlaying = await GetTitleSong(newSong);
+  console.log("Desde funcion " + nowPlaying);
   const newQueue = GetSongTitles(queue);
   io.emit("newSongAdded", { queue: newQueue, nowPlaying });
   console.log(newSong);
