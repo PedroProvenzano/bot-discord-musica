@@ -33,18 +33,14 @@ const AddToQueueHandler = async (link, msg) => {
     msg.reply(`Agregado a la fila ${link}`);
   }
   const newQueue = await GetSongTitles(queue);
-  io.emit("newSongAdded", { queue: newQueue });
+  io.emit("newSongAdded", { queue: newQueue, nowPlaying });
 };
 
 const GetNextSongHandler = async (msg) => {
   let newSong = queue[0];
   queue = queue.slice(1);
   console.log(`Removing ${newSong} from playlist`);
-  nowPlaying = await GetTitleSong(newSong);
-  console.log("Desde funcion " + nowPlaying);
-  const newQueue = GetSongTitles(queue);
-  io.emit("newSongAdded", { queue: newQueue, nowPlaying });
-  console.log(newSong);
+  GetTitleSong(newSong);
   return newSong;
 };
 
@@ -57,21 +53,20 @@ const GetSongTitles = async (queue) => {
     await fetch(urlAPI + key + "&key=" + APIKEY)
       .then((res) => res.json())
       .then(async (res) => {
-        console.log(res.items[0].snippet.title);
         TitleQueue.push(res.items[0].snippet.title);
       });
   }
-  console.log(TitleQueue);
   return TitleQueue;
 };
 
-const GetTitleSong = async (link) => {
+const GetTitleSong = (link) => {
   let key = getVideoId(link).id;
   fetch(urlAPI + key + "&key=" + APIKEY)
     .then((res) => res.json())
     .then(async (res) => {
-      console.log(res.items[0].snippet.title);
-      return res.items[0].snippet.title;
+      nowPlaying = res.items[0].snippet.title;
+      const newQueue = GetSongTitles(queue);
+      io.emit("newSongAdded", { queue: newQueue, nowPlaying });
     });
 };
 
