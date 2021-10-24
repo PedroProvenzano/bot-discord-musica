@@ -31,7 +31,7 @@ socket.on("newSongAdded", (data) => {
 
 socket.on("welcomeInfo", (data) => {
   console.log(data);
-  QueuePrinter(data.queue);
+  QueuePrinter(data.queue, data.nowPlaying);
 });
 
 // Functions
