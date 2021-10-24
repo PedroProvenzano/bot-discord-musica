@@ -67,8 +67,8 @@ app.get("/", (req, res) => {
 });
 
 client.on("message", async (msg) => {
-  let msgLower = msg.toLowerCase();
-  if (msgLower.content.startsWith("-play") && !isPlaying) {
+  let msgLower = msg.content.toLowerCase();
+  if (msgLower.startsWith("-play") && !isPlaying) {
     const youtubeLink = msg.content.slice(6);
     AddToQueueHandler(youtubeLink, msg);
 
@@ -90,14 +90,14 @@ client.on("message", async (msg) => {
       });
     };
     play();
-  } else if (msgLower.content.startsWith("-play") && isPlaying) {
+  } else if (msgLower.startsWith("-play") && isPlaying) {
     AddToQueueHandler(msg.content.slice(6), msg);
   }
   if (msg.content === "-stop") {
     await msg.member.voice.channel.leave();
     isPlaying = false;
   }
-  if (msgLower.content === "-skip") {
+  if (msgLower === "-skip") {
     if (queue.length === 0) {
       msg.reply(`Adios`);
       isPlaying = false;
