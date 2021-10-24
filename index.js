@@ -70,6 +70,7 @@ const GetTitleSong = async (link) => {
   await fetch(urlAPI + key + "&key=" + APIKEY)
     .then((res) => res.json())
     .then(async (res) => {
+      console.log(res);
       return res.items[0].snippet.title;
     });
 };
