@@ -87,14 +87,14 @@ client.on("message", async (msg) => {
     AddToQueueHandler(youtubeLink, msg);
 
     const connection = await msg.member.voice.channel.join();
-    let linkURL = await GetNextSongHandler(msg);
     play = () => {
       isPlaying = true;
       dispatcher = connection.play(
-        ytdl(linkURL, {
+        ytdl(queue[0], {
           filter: "audioonly",
         })
       );
+      let linkURL = GetNextSongHandler(msg);
       dispatcher.on("finish", async () => {
         if (queue.length === 0) {
           await msg.member.voice.channel.leave();
