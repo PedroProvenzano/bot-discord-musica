@@ -130,7 +130,7 @@ io.on("connection", async (socket) => {
   console.log("Usuario conectado");
 
   let newQueue = await GetSongTitles(queue);
-
+  console.log(`Ahora reproduciendo ${nowPlaying}`);
   socket.emit("welcomeInfo", { queue: newQueue, nowPlaying });
 
   socket.on("newSong", async (data) => {
@@ -140,6 +140,7 @@ io.on("connection", async (socket) => {
     socket.emit("newSongConfirm", {
       id: data.id,
       queue: TitleQueue,
+      nowPlaying,
     });
   });
 });

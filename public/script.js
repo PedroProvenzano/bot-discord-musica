@@ -22,7 +22,7 @@ socket.on("newSongConfirm", (data) => {
   if (data.id !== LocalId) return;
   const inputLink = document.querySelector("#input");
   inputLink.value = "";
-  QueuePrinter(data.queue);
+  QueuePrinter(data.queue, data.nowPlaying);
 });
 
 socket.on("newSongAdded", (data) => {
@@ -35,7 +35,7 @@ socket.on("welcomeInfo", (data) => {
 });
 
 // Functions
-const QueuePrinter = (queue, nowPlaying = null) => {
+const QueuePrinter = (queue, nowPlaying) => {
   const ListQueue = document.querySelector(".cont-list");
   ListQueue.innerHTML = "";
   if (nowPlaying) {
