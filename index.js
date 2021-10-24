@@ -67,10 +67,10 @@ const GetSongTitles = async (queue) => {
 
 const GetTitleSong = async (link) => {
   let key = getVideoId(link).id;
-  await fetch(urlAPI + key + "&key=" + APIKEY)
+  fetch(urlAPI + key + "&key=" + APIKEY)
     .then((res) => res.json())
     .then(async (res) => {
-      console.log(res);
+      console.log(res.items[0].snippet.title);
       return res.items[0].snippet.title;
     });
 };
