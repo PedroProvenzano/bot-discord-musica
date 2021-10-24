@@ -95,4 +95,5 @@ input {
 .nowPlaying {
   background-color: rgb(234, 241, 199) !important;
   margin-top: 2rem;
+  display: none;
 }

@@ -39,7 +39,7 @@ const GetNextSongHandler = async (msg) => {
   let newSong = queue[0];
   queue = queue.slice(1);
   console.log(`Removing ${newSong} from playlist`);
-  nowPlaying = newSong;
+  nowPlaying = await GetTitleSong(newSong);
   const newQueue = GetSongTitles(queue);
   io.emit("newSongAdded", { queue: newQueue, nowPlaying });
   return newSong;
@@ -60,6 +60,15 @@ const GetSongTitles = async (queue) => {
   }
   console.log(TitleQueue);
   return TitleQueue;
+};
+
+const GetTitleSong = (link) => {
+  let key = getVideoId(link).id;
+  await fetch(urlAPI + key + "&key=" + APIKEY)
+    .then((res) => res.json())
+    .then(async (res) => {
+      return res.items[0].snippet.title;
+    });
 };
 
 // Middleware

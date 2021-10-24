@@ -40,6 +40,7 @@ const QueuePrinter = (queue, nowPlaying = null) => {
   ListQueue.innerHTML = "";
   if (nowPlaying) {
     let divNowPlaying = document.querySelector("#nowPlaying");
+    divNowPlaying.style.display = "flex";
     divNowPlaying.innerHTML = `<p> Estas escuchando: ${nowPlaying}</p>`;
   }
   if (queue?.length >= 1) {
