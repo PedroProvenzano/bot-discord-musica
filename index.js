@@ -119,7 +119,7 @@ io.on("connection", async (socket) => {
 
   let newQueue = await GetSongTitles(queue);
 
-  socket.emit("welcomeInfo", { queue: newQueue });
+  socket.emit("welcomeInfo", { queue: newQueue, nowPlaying });
 
   socket.on("newSong", async (data) => {
     queue.push(data.link);
