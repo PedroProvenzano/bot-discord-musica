@@ -65,7 +65,7 @@ const GetTitleSong = (link) => {
     .then((res) => res.json())
     .then(async (res) => {
       nowPlaying = res.items[0].snippet.title;
-      const newQueue = GetSongTitles(queue);
+      const newQueue = await GetSongTitles(queue);
       io.emit("newSongAdded", { queue: newQueue, nowPlaying });
     });
 };
