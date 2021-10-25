@@ -36,6 +36,7 @@ const AddToQueueHandler = async (link, msg) => {
   io.emit("newSongAdded", { queue: newQueue, nowPlaying });
 };
 
+//s
 const GetNextSongHandler = async (msg) => {
   let newSong = queue[0];
   queue = queue.slice(1);
